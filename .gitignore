@@ -1,3 +1,4 @@
+.DS_Store
 .*.swp
 *.log
 *.iml
@@ -5,7 +6,6 @@
 tmp
 npm-debug.log
 /static
-build
 lib
 node_modules
 demo.tar.gz
@@ -22,8 +22,14 @@ coverage
 .nyc_output
 
 /server-nodejs/api-docs.tmp
-/demo/demo-fs
-/demo/static
+packages/demoapp/demo-files
 packages/client-react/.gh-pages-tmp
 packages/client-react/www/static
-/packages/server-nodejs/api-tests.tmp/
+packages/server-nodejs/api-tests.tmp
+packages/server-nodejs/test-results
+packages/server-nodejs/test-files
+packages/server-nodejs/api-docs.tmp
+
+# cypress.io
+cypress/videos/
+videosFolder

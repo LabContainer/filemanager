@@ -1,3 +1,4 @@
+'use strict';
 process.env.NODE_ENV = 'test';
 
 require('babel-register')({
@@ -12,4 +13,4 @@ require('babel-register')({
   ]
 });
 
-var chai = require('chai'); // eslint-disable-line
+require('chai');

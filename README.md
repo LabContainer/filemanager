@@ -1,15 +1,14 @@
 # Filemanager
 
 [![badge-circleci](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser.svg)](https://circleci.com/gh/OpusCapita/filemanager)
-[![badge-npm](https://img.shields.io/npm/v/@opuscapita/react-filemanager.svg)](https://www.npmjs.com/package/@opuscapita/react-filemanager)
+[![badge-npm](https://img.shields.io/npm/dm/@opuscapita/react-filemanager.svg)](https://www.npmjs.com/package/@opuscapita/react-filemanager)
 [![badge-license](https://img.shields.io/github/license/OpusCapita/filemanager.svg)](./LICENSE)
 
-## [Demo](http://opuscapita-filemanager-demo-master.azurewebsites.net/?currentComponentName=FileManager&maxContainerWidth=100%25&showSidebar=false)
+## [Demo](https://demo.core.dev.opuscapita.com/filemanager/master/?currentComponentName=FileManager&maxContainerWidth=100%25&showSidebar=false)
 
-## [React Documentation](http://opuscapita-filemanager-demo-master.azurewebsites.net/?currentComponentName=FileNavigator&maxContainerWidth=50%25&showSidebar=false)
+## [React Documentation](https://demo.core.dev.opuscapita.com/filemanager/master/?currentComponentName=FileNavigator&maxContainerWidth=100%25&showSidebar=true)
 
 > Demo and react documentation are powered by [React Showroom](https://github.com/OpusCapita/react-showroom-client)
-
 
 ### Packages
 
@@ -19,6 +18,12 @@
 * [Client React connector for Google Drive API v2](./packages/connector-google-drive-v2)
 
 Detailed documentation for each package is coming soon.
+
+### Spring Boot Starter
+
+Spring boot applications can benefit from Spring boot starter package found here:
+
+* [Spring Boot](./spring-boot) - see README there for details
 
 ### Basic usage
 
@@ -33,7 +38,7 @@ You can write you own custom connectors (documentation on how to do it will appe
 
 #### How to use Server Node
 
-[**Server Node API v1 Documentation**](http://opuscapita-filemanager-demo-master.azurewebsites.net/api/docs/)
+[**Server Node API v1 Documentation**](https://demo.core.dev.opuscapita.com/filemanager/master/api/docs)
 
 Install package
 
@@ -54,10 +59,10 @@ let config = {
 };
 
 let filemanager = require('@opuscapita/filemanager-server');
-filemanager.run(config);
+filemanager.server.run(config);
 ```
 
-* [Use as middleware](https://github.com/OpusCapita/filemanager/blob/master/demo/index.js)
+* [Use as middleware](https://github.com/OpusCapita/filemanager/blob/abbe7b00f57f86c25ed5eae2673920c02ec1859f/packages/demoapp/index.js#L5)
 
 #### How to use Client React
 
@@ -77,7 +82,7 @@ import connectorNodeV1 from '@opuscapita/react-filemanager-connector-node-v1';
 
 const apiOptions = {
   ...connectorNodeV1.apiOptions,
-  apiRoot: `http://opuscapita-filemanager-demo.azurewebsites.net/api` // Or you local Server Node V1 installation.
+  apiRoot: `http://opuscapita-filemanager-demo-master.azurewebsites.net/` // Or you local Server Node V1 installation.
 }
 
 const fileManager = (
@@ -88,7 +93,6 @@ const fileManager = (
         api={connectorNodeV1.api}
         apiOptions={apiOptions}
         capabilities={connectorNodeV1.capabilities}
-        initialResourceId={'Lw'}
         listViewLayout={connectorNodeV1.listViewLayout}
         viewLayoutOptions={connectorNodeV1.viewLayoutOptions}
       />
@@ -102,6 +106,17 @@ ReactDOM.render(fileManager, document.body);
 #### [Changelog](https://github.com/OpusCapita/filemanager/blob/master/CHANGELOG.md)
 #### [Code of Conduct](https://github.com/OpusCapita/filemanager/blob/master/.github/CODE_OF_CONDUCT.md)
 #### [Contributing Guide](https://github.com/OpusCapita/filemanager/blob/master/.github/CONTRIBUTING.md)
+
+## Development
+
+In any directory with `Makefile` (including repo's root) type `make` to see available commands (requires `make` utility to be installed locally, ideally GNU MAKE 4.2.1).
+
+There're prebuilt docker images with tools needed for building code and deploying demo application:
+```
+make container-for-code # starts a container, where one can execute 'make' to test/build/etc code (both for JS and Spring boot parts)
+// or
+make container-for-deployment # starts a container, where one can execute 'make' with goals related to deployment of demo application
+```
 
 ### Main contributors
 

@@ -1,6 +1,8 @@
-See [FileNavigator documentation and example](http://opuscapita-filemanager-demo-master.azurewebsites.net/?currentComponentName=FileNavigator&maxContainerWidth=100%25&showSidebar=true)
+See [FileNavigator documentation and example](https://demo.core.dev.opuscapita.com/filemanager/master/?currentComponentName=FileNavigator&maxContainerWidth=100%25&showSidebar=true)
 
-This module was created for testing in IE11 FileNavigator for nodeV1 API
+This module was created for testing in IE11 FileNavigator for nodeV1 API.
+
+**TODO - fix IE11 issues, then delete it**
 
 ### Code Example
 
@@ -22,7 +24,7 @@ This module was created for testing in IE11 FileNavigator for nodeV1 API
         api={_scope.connectors.nodeV1.api}
         apiOptions={{
           ..._scope.connectors.nodeV1.apiOptions,
-          apiRoot: `${window.env.SERVER_URL}/api`,
+          apiRoot: `${window.env.SERVER_URL}`,
           locale: 'en' // 'en' / 'de'
         }}
         capabilities={_scope.connectors.nodeV1.capabilities}
@@ -50,5 +52,5 @@ FileManagerOne
 
 ### License
 
-Licensed by © 2017 OpusCapita
+Apache License Version 2.0
 

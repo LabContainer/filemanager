@@ -54,33 +54,35 @@ class Toolbar extends Component {
   }
 
   handleMoveBackward = () => {
-    let { history } = this.props;
-    let newHistory = doHistoryStep(history, -1);
+    const { history } = this.props;
+    const newHistory = doHistoryStep(history, -1);
     this.props.onMoveBackward(newHistory);
   }
 
   handleMoveForward = () => {
-    let { history } = this.props;
-    let newHistory = doHistoryStep(history, 1);
+    const { history } = this.props;
+    const newHistory = doHistoryStep(history, 1);
     this.props.onMoveForward(newHistory);
   }
 
   render() {
-    let {
+    const {
       items,
       newButtonItems,
       newButtonText,
       history,
-      onMoveBackward, // eslint-disable-line
-      onMoveForward // eslint-disable-line
+      onMoveBackward, // eslint-disable-line no-unused-vars
+      onMoveForward // eslint-disable-line no-unused-vars
     } = this.props;
-    let { showDropdownMenu } = this.state;
+    const { showDropdownMenu } = this.state;
 
-    let itemsElement = items.length ? (
-      <div className="oc-fm--toolbar__items">
+    const itemsElement = items.length ? (
+      <div data-test-id="toolbar" className="oc-fm--toolbar__items">
         {items.map((item, i) => (
           <button
+            type="button"
             key={i}
+            data-test-id={`toolbar-item--${item.id}`}
             disabled={item.disabled}
             className={`oc-fm--toolbar__item`}
             title={item.label || ''}
@@ -97,8 +99,9 @@ class Toolbar extends Component {
     ) : null;
 
 
-    let newButtonElement = newButtonText ? (
+    const newButtonElement = newButtonText ? (
       <button
+        type="button"
         onClick={this.handleShowDropdownMenu}
         className="oc-fm--toolbar__new-button"
       >
@@ -107,6 +110,7 @@ class Toolbar extends Component {
     ) : newButtonItems.map((item, i) => (
       <button
         key={i}
+        data-test-id={`toolbar-item--${item.id}`}
         disabled={item.disabled}
         className={`oc-fm--toolbar__item`}
         title={item.label || ''}
@@ -120,13 +124,13 @@ class Toolbar extends Component {
       </button>
     ));
 
-    let dropdownMenuItems = newButtonItems.map((item, i) => (
+    const dropdownMenuItems = newButtonItems.map((item, i) => (
       <DropdownMenuItem key={i} icon={item.icon} onClick={item.onClick || (() => {})}>
         <span>{item.label}</span>
       </DropdownMenuItem>
     ));
 
-    let dropdownMenuElement = showDropdownMenu ? (
+    const dropdownMenuElement = showDropdownMenu ? (
       <DropdownMenu
         show={showDropdownMenu}
         onHide={this.handleHideDropdownMenu}
@@ -135,25 +139,26 @@ class Toolbar extends Component {
       </DropdownMenu>
     ) : null;
 
-    let newButtonContainer = newButtonText ? (
+    const newButtonContainer = newButtonText ? (
       <div className="oc-fm--toolbar__new-button-container">
-          {newButtonElement}
-          {dropdownMenuElement}
+        {newButtonElement}
+        {dropdownMenuElement}
       </div>
     ) : (
-      <div className="oc-fm--toolbar__items">
+      <div data-test-id="toolbar" className="oc-fm--toolbar__items">
         {newButtonElement}
       </div>
     );
 
     const getMessage = getMess.bind(null, this.props.locale);
 
-    let navButtons = (
+    const navButtons = (
       <div className="oc-fm--toolbar__nav-buttons">
         <button
+          type="button"
           disabled={!isHistoryStepPossible(history, -1)}
           className={`oc-fm--toolbar__item`}
-          title={getMessage('moveBack')}
+          title={getMessage('common.Toolbar.moveBack')}
           onClick={() => this.handleMoveBackward()}
         >
           <Svg
@@ -164,9 +169,10 @@ class Toolbar extends Component {
         </button>
 
         <button
+          type="button"
           disabled={!isHistoryStepPossible(history, 1)}
           className={`oc-fm--toolbar__item`}
-          title={getMessage('moveForward')}
+          title={getMessage('common.Toolbar.moveForward')}
           onClick={() => this.handleMoveForward()}
         >
           <Svg

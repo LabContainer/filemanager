@@ -55,7 +55,7 @@ function createIncorrectId(dirId, addName) {
 describe('Get resources metadata', () => {
   it('Get rootId', (done) => {
     request.
-      get(`${baseUrl}/api/files`).
+      get(`${baseUrl}/files`).
       then(res => {
         expect(res.status).to.equal(200);
 
@@ -80,7 +80,7 @@ describe('Get resources metadata', () => {
 
   it('Get root children', (done) => {
     request.
-      get(`${baseUrl}/api/files/${rootId}/children`).
+      get(`${baseUrl}/files/${rootId}/children`).
       query({ action: 'edit', city: 'London' }). // query string
       then(res => {
         let jsonData = res.body;
@@ -106,7 +106,7 @@ describe('Get resources metadata', () => {
 
   it('Get root children with query params', (done) => {
     request.
-      get(`${baseUrl}/api/files/${rootId}/children`).
+      get(`${baseUrl}/files/${rootId}/children`).
       query({ orderBy: 'name', orderDirection: 'ASC' }). // query string
       then(res => {
         let jsonData = res.body;
@@ -134,7 +134,7 @@ describe('Get resources metadata', () => {
 
   it('Get root children with incorrect orderBy', (done) => {
     request.
-      get(`${baseUrl}/api/files/${rootId}/children`).
+      get(`${baseUrl}/files/${rootId}/children`).
       query({ orderBy: 'nameOne' }).
       catch(err => {
         if (err && err.response && err.response.request.res) {
@@ -151,7 +151,7 @@ describe('Get resources metadata', () => {
 
   it('Get root children with incorrect orderDirection', (done) => {
     request.
-      get(`${baseUrl}/api/files/${rootId}/children`).
+      get(`${baseUrl}/files/${rootId}/children`).
       query({ orderDirection: 'DSC' }).
       catch(err => {
         if (err && err.response && err.response.request.res) {
@@ -168,7 +168,7 @@ describe('Get resources metadata', () => {
 
   it('Get workChildDir children', (done) => {
     request.
-      get(`${baseUrl}/api/files/${workChildDirId}/children`).
+      get(`${baseUrl}/files/${workChildDirId}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -193,7 +193,7 @@ describe('Get resources metadata', () => {
 
   it('Get children with incorrect id', (done) => {
     request.
-      get(`${baseUrl}/api/files/${createIncorrectId(workChildDirId, 'incorrect_dir_name')}/children`).
+      get(`${baseUrl}/files/${createIncorrectId(workChildDirId, 'incorrect_dir_name')}/children`).
       catch(err => {
         if (err && err.response && err.response.request.res) {
           expect(err.response.request.res.statusCode).to.equal(410);
@@ -209,7 +209,7 @@ describe('Get resources metadata', () => {
 
   it('Get workChildDir metadata', (done) => {
     request.
-      get(`${baseUrl}/api/files/${workChildDirId}`).
+      get(`${baseUrl}/files/${workChildDirId}`).
       then(res => {
         let jsonData = res.body;
 
@@ -227,7 +227,7 @@ describe('Get resources metadata', () => {
 
   it('Get workFile metadata', (done) => {
     request.
-      get(`${baseUrl}/api/files/${workFileId}`).
+      get(`${baseUrl}/files/${workFileId}`).
       then(res => {
         let jsonData = res.body;
 
@@ -245,11 +245,11 @@ describe('Get resources metadata', () => {
 });
 
 describe('Search for files/dirs', () => {
-  it('Search in root directory (default params)', (done) => {
+  it('Search in root directory by its first child name substring', (done) => {
     let nameSubstring = workChildDirName.slice(1, -1);
 
     request.
-      get(`${baseUrl}/api/files/${rootId}/search`).
+      get(`${baseUrl}/files/${rootId}/search`).
       query({
         itemNameSubstring: nameSubstring
       }).
@@ -272,52 +272,43 @@ describe('Search for files/dirs', () => {
       });
   });
 
-  it('Search with incorrect id', (done) => {
+  it('Search with invalid id', done => {
     request.
-      get(`${baseUrl}/api/files/${createIncorrectId(workChildDirId, 'incorrect_dir_name')}/search`).
+      get(`${baseUrl}/files/${createIncorrectId(workChildDirId, 'incorrect_dir_name')}/search`).
       query({
         itemNameSubstring: 'name'
       }).
+      then(res => done(new Error(`Searching with invalid ID must fail`))).
       catch(err => {
-        if (err && err.response && err.response.request.res) {
+        if (err && err.response && err.response.request && err.response.request.res) {
           expect(err.response.request.res.statusCode).to.equal(410);
           done();
         } else {
           done(err);
         }
-      }).
-      catch(err => {
-        done(err);
       });
-  });
+  }).timeout(3000);
 
-  it('Search in root directory (default params)', (done) => {
-    let nameSubstring = 'c';
-
+  it('Search in root directory for files with letter "c"', done => {
     request.
-      get(`${baseUrl}/api/files/${rootId}/search`).
+      get(`${baseUrl}/files/${rootId}/search`).
       query({
-        itemNameSubstring: nameSubstring
+        itemNameSubstring: 'c'
       }).
-      then(res => {
-        let jsonData = res.body;
-
-        expect(res.status).to.equal(200);
+      then(({ status, body: jsonData }) => {
+        expect(status).to.equal(200);
         expect(jsonData.items.length > 1).to.be.true; // eslint-disable-line
-
         done();
       }).
-      catch(err => {
-        done(err);
-      });
-  });
+      catch(done);
+  }).timeout(5000);
 
   describe('Various itemNameCaseSensitive', () => {
     it('Default params', (done) => {
       let nameSubstring = workChildDirName.slice(1, -1).toUpperCase();
 
       request.
-        get(`${baseUrl}/api/files/${rootId}/search`).
+        get(`${baseUrl}/files/${rootId}/search`).
         query({
           itemNameSubstring: nameSubstring
         }).
@@ -343,7 +334,7 @@ describe('Search for files/dirs', () => {
       let nameSubstring = workChildDirName.slice(1, -1).toUpperCase();
 
       request.
-        get(`${baseUrl}/api/files/${rootId}/search`).
+        get(`${baseUrl}/files/${rootId}/search`).
         query({
           itemNameSubstring: nameSubstring,
           itemNameCaseSensitive: false
@@ -371,7 +362,7 @@ describe('Search for files/dirs', () => {
       let nameSubstring = workChildDirName.slice(1, -1).toUpperCase();
 
       request.
-        get(`${baseUrl}/api/files/${rootId}/search`).
+        get(`${baseUrl}/files/${rootId}/search`).
         query({
           itemNameSubstring: nameSubstring,
           itemNameCaseSensitive: true
@@ -395,7 +386,7 @@ describe('Search for files/dirs', () => {
       let nameSubstring = workChildDirName.slice(1, -1);
 
       request.
-        get(`${baseUrl}/api/files/${rootId}/search`).
+        get(`${baseUrl}/files/${rootId}/search`).
         query({
           itemNameSubstring: nameSubstring,
           itemType: 'dir'
@@ -423,7 +414,7 @@ describe('Search for files/dirs', () => {
       let nameSubstring = workChildDirName.slice(1, -1);
 
       request.
-        get(`${baseUrl}/api/files/${rootId}/search`).
+        get(`${baseUrl}/files/${rootId}/search`).
         query({
           itemNameSubstring: nameSubstring,
           itemType: 'file'
@@ -445,7 +436,7 @@ describe('Search for files/dirs', () => {
       let nameSubstring = workFileName.slice(1, -1);
 
       request.
-        get(`${baseUrl}/api/files/${rootId}/search`).
+        get(`${baseUrl}/files/${rootId}/search`).
         query({
           itemNameSubstring: nameSubstring,
           itemType: 'file',
@@ -474,7 +465,7 @@ describe('Search for files/dirs', () => {
       let nameSubstring = workFileName.slice(1, -1);
 
       request.
-        get(`${baseUrl}/api/files/${rootId}/search`).
+        get(`${baseUrl}/files/${rootId}/search`).
         query({
           itemNameSubstring: nameSubstring,
           itemType: 'file',
@@ -497,7 +488,7 @@ describe('Search for files/dirs', () => {
       let nameSubstring = workFileName.slice(1, -1);
 
       request.
-        get(`${baseUrl}/api/files/${rootId}/search`).
+        get(`${baseUrl}/files/${rootId}/search`).
         query({
           itemNameSubstring: nameSubstring,
           itemType: 'file',
@@ -520,11 +511,138 @@ describe('Search for files/dirs', () => {
         });
     });
   });
+
+  describe('Various fileContentSubstring', () => {
+    it('Case-insensitive content search by default', (done) => {
+      request.
+        get(`${baseUrl}/files/${workChildDirId}/search`).
+        query({
+          fileContentSubstring: 'log'
+        }).
+        then(res => {
+          let jsonData = res.body;
+          expect(res.status).to.equal(200);
+          expect(jsonData.items).to.be.an('array');
+
+          expect(jsonData.items.map(({ name }) => name)).to.have.members([
+            'gpl.pdf',
+            'hello-world.js'
+          ]);
+
+          done();
+        }).
+        catch(err => {
+          done(err);
+        });
+    });
+
+    it('Case-insensitive content search', (done) => {
+      request.
+        get(`${baseUrl}/files/${workChildDirId}/search`).
+        query({
+          fileContentSubstring: 'log',
+          fileContentCaseSensitive: 'false'
+        }).
+        then(res => {
+          let jsonData = res.body;
+          expect(res.status).to.equal(200);
+          expect(jsonData.items).to.be.an('array');
+
+          expect(jsonData.items.map(({ name }) => name)).to.have.members([
+            'gpl.pdf',
+            'hello-world.js'
+          ]);
+
+          done();
+        }).
+        catch(err => {
+          done(err);
+        });
+    });
+
+    it('Case-insensitive content + filename search', (done) => {
+      request.
+        get(`${baseUrl}/files/${workChildDirId}/search`).
+        query({
+          itemNameSubstring: 'hello',
+          itemNameCaseSensitive: 'true',
+          fileContentSubstring: 'log',
+          fileContentCaseSensitive: 'false'
+        }).
+        then(res => {
+          let jsonData = res.body;
+          expect(res.status).to.equal(200);
+          expect(jsonData.items).to.be.an('array');
+          expect(jsonData.items.map(({ name }) => name)).to.have.members(['hello-world.js']);
+          done();
+        }).
+        catch(err => {
+          done(err);
+        });
+    });
+
+    it('Case-sensitive content search', (done) => {
+      request.
+        get(`${baseUrl}/files/${workChildDirId}/search`).
+        query({
+          fileContentSubstring: 'log',
+          fileContentCaseSensitive: 'true'
+        }).
+        then(res => {
+          let jsonData = res.body;
+          expect(res.status).to.equal(200);
+          expect(jsonData.items).to.be.an('array');
+          expect(jsonData.items.map(({ name }) => name)).to.have.members(['gpl.pdf']);
+          done();
+        }).
+        catch(err => {
+          done(err);
+        });
+    });
+
+    it('Invalid content search for a dirs', (done) => {
+      request.
+        get(`${baseUrl}/files/${workChildDirId}/search`).
+        query({
+          fileContentSubstring: 'log',
+          fileContentCaseSensitive: 'true',
+          itemType: 'dir'
+        }).
+        then(res => done(new Error(`Searching with invalid "itemType" must fail`))).
+        catch(err => {
+          if (err && err.response && err.response.request && err.response.request.res) {
+            expect(err.response.request.res.statusCode).to.equal(400);
+            done();
+          } else {
+            done(err);
+          }
+        });
+    });
+
+    it('Invalid content search for a dirs/files', (done) => {
+      request.
+        get(`${baseUrl}/files/${workChildDirId}/search`).
+        query({
+          fileContentSubstring: 'log',
+          fileContentCaseSensitive: 'true',
+          itemType: ['dir', 'file']
+        }).
+        then(res => done(new Error(`Searching with invalid "itemType" must fail`))).
+        catch(err => {
+          if (err && err.response && err.response.request && err.response.request.res) {
+            expect(err.response.request.res.statusCode).to.equal(400);
+            done();
+          } else {
+            done(err);
+          }
+        });
+    });
+  });
 });
 
 describe('Rename resources', () => {
   it('Rename dir', (done) => {
-    let route = `${baseUrl}/api/files/${workChildDirId}`;
+    let route = `${baseUrl}/files/${workChildDirId}`;
     let method = 'PATCH';
     let newName = 'changed dir';
 
@@ -548,7 +666,7 @@ describe('Rename resources', () => {
   });
 
   it('Rename resource with incorrect id', (done) => {
-    let route = `${baseUrl}/api/files/${createIncorrectId(changedWorkChildDirId, 'incorrect_dir_name')}`;
+    let route = `${baseUrl}/files/${createIncorrectId(changedWorkChildDirId, 'incorrect_dir_name')}`;
     let method = 'PATCH';
     let newName = 'bad changed dir';
 
@@ -569,7 +687,7 @@ describe('Rename resources', () => {
   });
 
   it('Rename root dir', (done) => {
-    let route = `${baseUrl}/api/files/${rootId}`;
+    let route = `${baseUrl}/files/${rootId}`;
     let method = 'PATCH';
     let newName = 'new root';
 
@@ -590,7 +708,7 @@ describe('Rename resources', () => {
   });
 
   it('Rename dir (restore dir name)', (done) => {
-    let route = `${baseUrl}/api/files/${changedWorkChildDirId}`;
+    let route = `${baseUrl}/files/${changedWorkChildDirId}`;
     let method = 'PATCH';
 
     request(method, route).
@@ -613,7 +731,7 @@ describe('Rename resources', () => {
   });
 
   it('Rename file', (done) => {
-    let route = `${baseUrl}/api/files/${workFileId}`;
+    let route = `${baseUrl}/files/${workFileId}`;
     let method = 'PATCH';
     let newName = 'changed file';
 
@@ -637,7 +755,7 @@ describe('Rename resources', () => {
   });
 
   it('Rename file (restore file name)', (done) => {
-    let route = `${baseUrl}/api/files/${changedFileId}`;
+    let route = `${baseUrl}/files/${changedFileId}`;
     let method = 'PATCH';
 
     request(method, route).
@@ -661,7 +779,7 @@ describe('Rename resources', () => {
 
   it('Check root dir', (done) => {
     request.
-      get(`${baseUrl}/api/files/${rootId}/children`).
+      get(`${baseUrl}/files/${rootId}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -677,7 +795,7 @@ describe('Rename resources', () => {
 
   it('Check workChildDir', (done) => {
     request.
-      get(`${baseUrl}/api/files/${workChildDirId}/children`).
+      get(`${baseUrl}/files/${workChildDirId}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -696,7 +814,7 @@ describe('Create dirs', () => {
   it('Create child dir', done => {
     newDirName = 'new dir';
 
-    let route = `${baseUrl}/api/files`;
+    let route = `${baseUrl}/files`;
     let method = 'POST';
     let params = {
       parentId: rootId,
@@ -735,7 +853,7 @@ describe('Create dirs', () => {
   it('Create grandchild dir 1', done => {
     newGrandchildName1 = 'grandchild dir 1';
 
-    let route = `${baseUrl}/api/files`;
+    let route = `${baseUrl}/files`;
     let method = 'POST';
     let params = {
       parentId: newDirId,
@@ -774,7 +892,7 @@ describe('Create dirs', () => {
   it('Create grandchild dir 2', done => {
     newGrandchildName2 = 'grandchild dir 2';
 
-    let route = `${baseUrl}/api/files`;
+    let route = `${baseUrl}/files`;
     let method = 'POST';
     let params = {
       parentId: newDirId,
@@ -813,7 +931,7 @@ describe('Create dirs', () => {
   it('Create grandchild dir 3', done => {
     newGrandchildName3 = 'grandchild dir 3';
 
-    let route = `${baseUrl}/api/files`;
+    let route = `${baseUrl}/files`;
     let method = 'POST';
     let params = {
       parentId: newDirId,
@@ -850,7 +968,7 @@ describe('Create dirs', () => {
   });
 
   it('Create dir with incorrect :id', done => {
-    let route = `${baseUrl}/api/files`;
+    let route = `${baseUrl}/files`;
     let method = 'POST';
     let incorrectId = createIncorrectId(newDirId, 'incorrect_dir');
     let params = {
@@ -874,7 +992,7 @@ describe('Create dirs', () => {
   });
 
   it('Create dir without parentId', done => {
-    let route = `${baseUrl}/api/files`;
+    let route = `${baseUrl}/files`;
     let method = 'POST';
     let params = {
       name: 'new dir 1',
@@ -896,7 +1014,7 @@ describe('Create dirs', () => {
   });
 
   it('Create dir without type', done => {
-    let route = `${baseUrl}/api/files`;
+    let route = `${baseUrl}/files`;
     let method = 'POST';
     let params = {
       parentId: newDirId,
@@ -918,10 +1036,10 @@ describe('Create dirs', () => {
   });
 
   it('Create dir and attach file', done => {
-    let workDirPath = `../../demo/demo-fs/${workChildDirName}`;
+    let workDirPath = `./test-files/${workChildDirName}`;
     let fileName = fs.readdirSync(workDirPath)[0];
     let file = fs.readFileSync(`${workDirPath}/${fileName}`);
-    let route = `${baseUrl}/api/files`;
+    let route = `${baseUrl}/files`;
 
     request.post(route).
       field('type', 'dir').
@@ -943,7 +1061,7 @@ describe('Create dirs', () => {
 
   it('Check newDir', done => {
     request.
-      get(`${baseUrl}/api/files/${newDirId}/children`).
+      get(`${baseUrl}/files/${newDirId}/children`).
       then(res => {
         let jsonData = res.body;
         newDirSize = jsonData.items.length;
@@ -967,7 +1085,7 @@ describe('Create dirs', () => {
 
 describe('Copy resouces', () => {
   it('Copy file', done => {
-    let route = `${baseUrl}/api/files/${workFileId}`;
+    let route = `${baseUrl}/files/${workFileId}`;
     let method = 'PATCH';
 
     request(method, route).
@@ -1000,7 +1118,7 @@ describe('Copy resouces', () => {
   });
 
   it('Copy file with incorrect id-1', (done) => {
-    let route = `${baseUrl}/api/files/${createIncorrectId(workChildDirId, 'incorrect_dir_name')}`;
+    let route = `${baseUrl}/files/${createIncorrectId(workChildDirId, 'incorrect_dir_name')}`;
     let method = 'PATCH';
 
     request(method, route).
@@ -1020,7 +1138,7 @@ describe('Copy resouces', () => {
   });
 
   it('Copy file with incorrect id-2', (done) => {
-    let route = `${baseUrl}/api/files/${workFileId}`;
+    let route = `${baseUrl}/files/${workFileId}`;
     let method = 'PATCH';
 
     request(method, route).
@@ -1040,7 +1158,7 @@ describe('Copy resouces', () => {
   });
 
   it('Copy file with incorrect id-3', (done) => {
-    let route = `${baseUrl}/api/files/${workFileId}`;
+    let route = `${baseUrl}/files/${workFileId}`;
     let method = 'PATCH';
 
     request(method, route).
@@ -1061,7 +1179,7 @@ describe('Copy resouces', () => {
 
   it('Copy file with new name', done => {
     copiedFileName = 'copied file';
-    let route = `${baseUrl}/api/files/${workFileId}`;
+    let route = `${baseUrl}/files/${workFileId}`;
     let method = 'PATCH';
     let params = {
       name: copiedFileName,
@@ -1100,7 +1218,7 @@ describe('Copy resouces', () => {
   });
 
   it('Copy file to sibling dir', done => {
-    let route = `${baseUrl}/api/files/${copiedFileId}`;
+    let route = `${baseUrl}/files/${copiedFileId}`;
     let method = 'PATCH';
     let params = {
       name: copiedFileName,
@@ -1138,7 +1256,7 @@ describe('Copy resouces', () => {
 
   it('Check workChildDir', done => {
     request.
-      get(`${baseUrl}/api/files/${workChildDirId}/children`).
+      get(`${baseUrl}/files/${workChildDirId}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -1154,7 +1272,7 @@ describe('Copy resouces', () => {
 
   it('Check newGrandchildId1', done => {
     request.
-      get(`${baseUrl}/api/files/${newGrandchildId1}/children`).
+      get(`${baseUrl}/files/${newGrandchildId1}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -1170,7 +1288,7 @@ describe('Copy resouces', () => {
 
   it('Check newGrandchildId2', done => {
     request.
-      get(`${baseUrl}/api/files/${newGrandchildId2}/children`).
+      get(`${baseUrl}/files/${newGrandchildId2}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -1187,7 +1305,7 @@ describe('Copy resouces', () => {
 
 describe('Move resources', () => {
   it('Move file with incorrect id-1', (done) => {
-    let route = `${baseUrl}/api/files/${createIncorrectId(copiedFileId, 'incorrect_dir_name')}`;
+    let route = `${baseUrl}/files/${createIncorrectId(copiedFileId, 'incorrect_dir_name')}`;
     let method = 'PATCH';
     let params = {
       parents: [newGrandchildId3]
@@ -1210,7 +1328,7 @@ describe('Move resources', () => {
   });
 
   it('Move file with incorrect id-2', (done) => {
-    let route = `${baseUrl}/api/files/${copiedFileId}`;
+    let route = `${baseUrl}/files/${copiedFileId}`;
     let method = 'PATCH';
     let params = {
       parents: [createIncorrectId(copiedFileId, 'incorrect_dir_name')]
@@ -1233,7 +1351,7 @@ describe('Move resources', () => {
   });
 
   it('Move file', done => {
-    let route = `${baseUrl}/api/files/${copiedFileId}`;
+    let route = `${baseUrl}/files/${copiedFileId}`;
     let method = 'PATCH';
     let params = {
       parents: [newGrandchildId3]
@@ -1272,7 +1390,7 @@ describe('Move resources', () => {
 
   it('Check newGrandchildId1', done => {
     request.
-      get(`${baseUrl}/api/files/${newGrandchildId1}/children`).
+      get(`${baseUrl}/files/${newGrandchildId1}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -1288,7 +1406,7 @@ describe('Move resources', () => {
 
   it('Check newGrandchildId2', done => {
     request.
-      get(`${baseUrl}/api/files/${newGrandchildId2}/children`).
+      get(`${baseUrl}/files/${newGrandchildId2}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -1304,7 +1422,7 @@ describe('Move resources', () => {
 
   it('Check newGrandchildId3', done => {
     request.
-      get(`${baseUrl}/api/files/${newGrandchildId3}/children`).
+      get(`${baseUrl}/files/${newGrandchildId3}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -1321,7 +1439,7 @@ describe('Move resources', () => {
 
 describe('Download', () => {
   it('Download file', done => {
-    const downloadUrl = `${baseUrl}/api/download?items=${copiedFileId3}`;
+    const downloadUrl = `${baseUrl}/download?items=${copiedFileId3}`;
     request.get(downloadUrl).
       responseType('blob').
       then(res => {
@@ -1336,7 +1454,7 @@ describe('Download', () => {
   });
 
   it('Download folder', done => {
-    const downloadUrl = `${baseUrl}/api/download?items=${newGrandchildId3}`;
+    const downloadUrl = `${baseUrl}/download?items=${newGrandchildId3}`;
     request.get(downloadUrl).
       responseType('blob').
       then(res => {
@@ -1351,7 +1469,7 @@ describe('Download', () => {
   });
 
   it('Download file with incorrect id', done => {
-    const downloadUrl = `${baseUrl}/api/download?items=${createIncorrectId(newGrandchildId3, 'incorrect-dir')}`;
+    const downloadUrl = `${baseUrl}/download?items=${createIncorrectId(newGrandchildId3, 'incorrect-dir')}`;
     request.get(downloadUrl).
       responseType('blob').
       catch(err => {
@@ -1370,10 +1488,10 @@ describe('Download', () => {
 
 describe('Upload file', () => {
   it('Upload file with incorrect id', (done) => {
-    let workDirPath = `../../demo/demo-fs/${workChildDirName}`;
+    let workDirPath = `./test-files/${workChildDirName}`;
     let fileName = fs.readdirSync(workDirPath)[0];
     let file = fs.readFileSync(`${workDirPath}/${fileName}`);
-    let route = `${baseUrl}/api/files`;
+    let route = `${baseUrl}/files`;
 
     request.post(route).
       field('type', 'file').
@@ -1394,10 +1512,10 @@ describe('Upload file', () => {
   });
 
   it('Upload file', done => {
-    let workDirPath = `../../demo/demo-fs/${workChildDirName}`;
+    let workDirPath = `./test-files/${workChildDirName}`;
     let fileName = fs.readdirSync(workDirPath)[0];
     let file = fs.readFileSync(`${workDirPath}/${fileName}`);
-    let route = `${baseUrl}/api/files`;
+    let route = `${baseUrl}/files`;
 
     request.post(route).
       field('type', 'file').
@@ -1432,7 +1550,7 @@ describe('Upload file', () => {
 
 describe('Remove resources', () => {
   it('Remove file', done => {
-    let route = `${baseUrl}/api/files/${copiedFileId3}`;
+    let route = `${baseUrl}/files/${copiedFileId3}`;
     let method = 'DELETE';
     request(method, route).
       then(res => {
@@ -1447,7 +1565,7 @@ describe('Remove resources', () => {
 
   it('Check newGrandchildId3', done => {
     request.
-      get(`${baseUrl}/api/files/${newGrandchildId3}/children`).
+      get(`${baseUrl}/files/${newGrandchildId3}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -1462,7 +1580,7 @@ describe('Remove resources', () => {
   });
 
   it('Remove resource with incorrect id', done => {
-    let route = `${baseUrl}/api/files/${createIncorrectId(newDirId, 'incorrect-dir')}`;
+    let route = `${baseUrl}/files/${createIncorrectId(newDirId, 'incorrect-dir')}`;
     let method = 'DELETE';
     request(method, route).
       then(res => {
@@ -1476,7 +1594,7 @@ describe('Remove resources', () => {
   });
 
   it('Remove root dir', done => {
-    let route = `${baseUrl}/api/files/${rootId}`;
+    let route = `${baseUrl}/files/${rootId}`;
     let method = 'DELETE';
     request(method, route).
       catch(err => {
@@ -1493,7 +1611,7 @@ describe('Remove resources', () => {
   });
 
   it('Remove dir', done => {
-    let route = `${baseUrl}/api/files/${newGrandchildId3}`;
+    let route = `${baseUrl}/files/${newGrandchildId3}`;
     let method = 'DELETE';
     request(method, route).
       then(res => {
@@ -1508,7 +1626,7 @@ describe('Remove resources', () => {
 
   it('Check newDir', done => {
     request.
-      get(`${baseUrl}/api/files/${newDirId}/children`).
+      get(`${baseUrl}/files/${newDirId}/children`).
       then(res => {
         let jsonData = res.body;
 
@@ -1523,7 +1641,7 @@ describe('Remove resources', () => {
   });
 
   it('Remove not empty dir', done => {
-    let route = `${baseUrl}/api/files/${newDirId}`;
+    let route = `${baseUrl}/files/${newDirId}`;
     let method = 'DELETE';
     request(method, route).
       then(res => {

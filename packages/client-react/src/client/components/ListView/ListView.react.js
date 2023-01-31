@@ -1,20 +1,23 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import './ListView.less';
-import 'react-virtualized/styles.css';
-// TBD individual imports from 'react-virtualized' to decrease bundle size?
-// ex. import Table from 'react-virtualized/dist/commonjs/Table'
-import { Table, AutoSizer, SortDirection } from 'react-virtualized';
-import { ContextMenuTrigger } from "react-contextmenu";
-import NoFilesFoundStub from '../NoFilesFoundStub';
-import Row from './Row.react';
-import ScrollOnMouseOut from '../ScrollOnMouseOut';
+import PropTypes from 'prop-types';
 import { range } from 'lodash';
 import nanoid from 'nanoid';
 import detectIt from 'detect-it';
+// TBD individual imports from 'react-virtualized' to decrease bundle size?
+// ex. import Table from 'react-virtualized/dist/commonjs/Table'
+import { Table, AutoSizer, SortDirection } from 'react-virtualized';
+import 'react-virtualized/styles.css';
+import { ContextMenuTrigger } from "react-contextmenu";
+
+import NoFilesFoundStub from '../NoFilesFoundStub';
+import Row from './Row.react';
+import ScrollOnMouseOut from '../ScrollOnMouseOut';
 import rawToReactElement from '../raw-to-react-element';
 import WithSelection from './withSelectionHOC';
 import { isDef } from './utils';
+
+import './ListView.less';
+
 
 const ROW_HEIGHT = 38;
 const HEADER_HEIGHT = 38;
@@ -44,7 +47,8 @@ const propTypes = {
   onSelection: PropTypes.func,
   onSort: PropTypes.func,
   onKeyDown: PropTypes.func,
-  onRef: PropTypes.func
+  onRef: PropTypes.func,
+  locale: PropTypes.string
 };
 const defaultProps = {
   rowContextMenuId: nanoid(),
@@ -63,7 +67,8 @@ const defaultProps = {
   onSelection: () => {},
   onSort: () => {},
   onKeyDown: () => {},
-  onRef: () => {}
+  onRef: () => {},
+  locale: 'en'
 };
 
 export default
@@ -146,13 +151,21 @@ class ListView extends Component {
     this.props.onSort({ sortBy, sortDirection });
   }
 
+  handleRowClick = ({ event, index, rowData }) => {
+    this.props.onRowClick({ event, index, rowData });
+  }
+
+  handleRowRightClick = ({ event, index, rowData }) => {
+    this.props.onRowRightClick({ event, index, rowData });
+  }
+
   handleRowDoubleClick = ({ event, index, rowData }) => {
     this.props.onRowDoubleClick({ event, index, rowData });
   }
 
   handleSelection = ({ selection, scrollToIndex }) => {
     this.props.onSelection(selection);
-    this.scrollToIndex(scrollToIndex)
+    this.scrollToIndex(scrollToIndex);
   }
 
   render() {
@@ -192,6 +205,9 @@ class ListView extends Component {
             items={itemsToRender}
             onKeyDown={this.handleKeyDown}
             onSelection={this.handleSelection}
+            onRowClick={this.handleRowClick}
+            onRowRightClick={this.handleRowRightClick}
+            onRowDoubleClick={this.handleRowDoubleClick}
             selection={this.props.selection}
             onRef={onRef}
           >
@@ -199,6 +215,7 @@ class ListView extends Component {
               ({
                 onRowClick,
                 onRowRightClick,
+                onRowDoubleClick,
                 selection,
                 lastSelected
               }) => (
@@ -232,16 +249,16 @@ class ListView extends Component {
                         onScroll={this.handleScroll}
                         scrollToIndex={scrollToIndex}
                         scrollTop={scrollTop}
-                        sort={this.handleSort} // eslint-disable-line
+                        sort={this.handleSort} // eslint-disable-line react/jsx-handler-names
                         sortBy={sortBy}
                         sortDirection={sortDirection}
                         rowRenderer={Row({
                           selection, lastSelected, loading, contextMenuId: rowContextMenuId, hasTouch: HAS_TOUCH
                         })}
-                        noRowsRenderer={NoFilesFoundStub}
+                        noRowsRenderer={() => <NoFilesFoundStub locale={this.props.locale}/>}
                         onRowClick={onRowClick}
                         onRowRightClick={onRowRightClick}
-                        onRowDoubleClick={this.handleRowDoubleClick}
+                        onRowDoubleClick={onRowDoubleClick}
                       >
                         {layout({ ...layoutOptions, loading, width, height }).map(
                           (rawLayoutChild, i) => rawToReactElement(rawLayoutChild, i)

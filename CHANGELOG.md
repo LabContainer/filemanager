@@ -1,4 +1,176 @@
 
+[Release 1.1.12](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.12) Thu Apr 07 2022 11:50:08 GMT+0300 (MSK)
+=======================================================
+
+- Update prop-types to 15.8.1 ([#333](https://github.com/OpusCapita/filemanager/issues/333)) (GitHub 31243790+estambakio-sc@users.noreply.github.com, 2022-04-07 11:40:28 +0300)
+- [epc-49] Implement copying tls secret (Vladislav Rachok rachok@scand.com, 2022-03-28 22:50:14 +0300)
+- (EPROC-21097) Improved env variables setting (ashestak ashestak@scand.com, 2022-03-22 18:20:38 +0300)
+- (EPROC-21097) Improved env variables setting (Alexandr Shestak ashestak-sc@users.noreply.github.com, 2022-03-22 11:51:55 +0300)
+
+[Release 1.1.11](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.11) Fri Jan 21 2022 15:34:54 GMT+0300 (MSK)
+=======================================================
+
+- Implement Filemanager Spring Boot starter ([#328](https://github.com/OpusCapita/filemanager/issues/328)) (GitHub 31243790+estambakio-sc@users.noreply.github.com, 2022-01-21 15:20:54 +0300)
+- (EPC-21) Update Helm version to 3.7.2 (Vladislav Rachok rachok@scand.com, 2022-01-07 19:55:44 +0300)
+- (EPC-17) Fix Ingress resources according new api version (Vladislav Rachok rachok@scand.com, 2021-11-23 16:58:46 +0300)
+
+[Release 1.1.10](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.10) Tue Jul 20 2021 11:23:33 GMT+0300 (MSK)
+=======================================================
+
+- Translate message "Nothing to show" ([#319](https://github.com/OpusCapita/filemanager/issues/319)) (GitHub abaliunov-sc@users.noreply.github.com, 2021-07-20 11:14:02 +0300)
+
+[Release 1.1.9](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.9) Wed Jul 07 2021 18:22:02 GMT+0300 (MSK)
+=======================================================
+
+- (issue-316) Update lodash to 4.17.21 ([#317](https://github.com/OpusCapita/filemanager/issues/317)) (GitHub abaliunov-sc@users.noreply.github.com, 2021-07-07 10:03:43 +0300)
+
+[Release 1.1.8](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.8) Fri Jun 25 2021 11:55:25 GMT+0300 (MSK)
+=======================================================
+
+- (EPROC-20549) Make translation keys unique ([#314](https://github.com/OpusCapita/filemanager/issues/314)) (GitHub dsanko-sc@users.noreply.github.com, 2021-06-24 12:55:17 +0300)
+- Issue template update to new dfault Project ID (GitHub achernyakevich-sc@users.noreply.github.com, 2021-04-28 19:07:37 +0300)
+
+[Release 1.1.7](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.7) Tue Apr 27 2021 09:43:33 GMT+0300 (MSK)
+=======================================================
+
+- [#283](https://github.com/OpusCapita/filemanager/issues/283) Update lodash to 4.17.19 ([#311](https://github.com/OpusCapita/filemanager/issues/311)) (GitHub 31243790+estambakio-sc@users.noreply.github.com, 2021-04-27 09:42:29 +0300)
+
+[Release 1.1.6](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.6) Tue Apr 27 2021 09:17:06 GMT+0300 (MSK)
+=======================================================
+
+- Fix indentation [ci skip] (Egor Stambakio egor.stambakio@opuscapita.com, 2021-04-27 09:16:00 +0300)
+
+[Release 1.1.5](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.5) Tue Apr 27 2021 09:09:23 GMT+0300 (MSK)
+=======================================================
+
+- Added Arabic Translation ([#310](https://github.com/OpusCapita/filemanager/issues/310)) (GitHub 46839821+imdkbj@users.noreply.github.com, 2021-04-27 11:36:34 +0530)
+- Update config.yml (GitHub ashestak-sc@users.noreply.github.com, 2021-04-06 13:21:21 +0300)
+- (EPROC-20383) Used jdk zulu (GitHub ashestak-sc@users.noreply.github.com, 2021-04-06 13:04:39 +0300)
+- (EPROC-20252) Fixed build process (Artsiom Osipenko artem.osipenko@opuscapita.com, 2021-03-26 12:19:30 +0300)
+- (EPROC-20252) Added circleci builds jira integration (GitHub ashestak-sc@users.noreply.github.com, 2021-03-10 16:01:59 +0300)
+
+[Release 1.1.4](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.4) Wed Nov 25 2020 16:45:47 GMT+0300 (MSK)
+=======================================================
+
+- Add the french translation ([#296](https://github.com/OpusCapita/filemanager/issues/296)) (GitHub 45885981+MaximeMazet@users.noreply.github.com, 2020-11-25 14:35:14 +0100)
+
+[Release 1.1.3](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.3) Thu Nov 19 2020 09:19:30 GMT+0300 (MSK)
+=======================================================
+
+- Add Chinese translations ([#294](https://github.com/OpusCapita/filemanager/issues/294)) (GitHub greyyang@outlook.com, 2020-11-19 14:07:26 +0800)
+
+[Release 1.1.2](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.2) Tue Sep 29 2020 12:14:35 GMT+0300 (MSK)
+=======================================================
+
+- Use `type="button"` for Toolbar Buttons ([#292](https://github.com/OpusCapita/filemanager/issues/292)) (GitHub guy.paddock@gmail.com, 2020-09-29 04:51:34 -0400)
+- (Issue [#83](https://github.com/OpusCapita/filemanager/issues/83)) Made "LocationBar" scrollable for long locations ([#277](https://github.com/OpusCapita/filemanager/issues/277)) (GitHub Stupakov08@gmail.com, 2020-06-18 09:02:21 +0300)
+- Fix perform spelling ([#260](https://github.com/OpusCapita/filemanager/issues/260)) (GitHub chrisdwheatley@users.noreply.github.com, 2020-04-24 07:07:59 +0100)
+- Update ingress version for k8s 1.16.x (Egor Stambakio egor.stambakio@opuscapita.com, 2020-04-08 16:59:46 +0300)
+
+[Release 1.1.1](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.1) Mon Mar 23 2020 11:57:20 GMT+0300 (MSK)
+=======================================================
+
+- Get rid of dead code. Remove drag'n'drop related dependencies. ([#275](https://github.com/OpusCapita/filemanager/issues/275)) (GitHub visortelle@gmail.com, 2020-03-23 11:53:22 +0300)
+
+[Release 1.1.0-beta.7](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.0-beta.7) Tue Feb 04 2020 19:42:35 GMT+0300 (MSK)
+=======================================================
+
+- Add 'onClickOutside' property to FileNavigator. (kvolkovich-sc volkovich@scand.com, 2020-02-04 19:39:58 +0300)
+- Fix ingress configuration (Egor Stambakio egor.stambakio@opuscapita.com, 2019-11-22 14:49:32 +0300)
+- Prepare deployment for new Kubernetes setup ([#263](https://github.com/OpusCapita/filemanager/issues/263)) (GitHub 31243790+estambakio-sc@users.noreply.github.com, 2019-11-21 08:34:27 +0300)
+- Refactor CI process ([#259](https://github.com/OpusCapita/filemanager/issues/259)) (GitHub 31243790+estambakio-sc@users.noreply.github.com, 2019-10-04 13:01:44 +0300)
+- Update README.md (GitHub kvolkovich-sc@users.noreply.github.com, 2019-06-24 17:37:31 +0300)
+- Fix .gitignore, etc. (kvolkovich-sc kirill.volkovich@opuscapita.com, 2019-04-23 23:05:25 +0300)
+- Add very basic Cypress tests (kvolkovich-sc kirill.volkovich@opuscapita.com, 2019-04-23 22:44:07 +0300)
+- Update FileManagerOne.DOCUMENTATION.md (GitHub kvolkovich-sc@users.noreply.github.com, 2019-01-20 19:57:30 +0300)
+- Update FileManager.DOCUMENTATION.md (GitHub kvolkovich-sc@users.noreply.github.com, 2019-01-20 19:57:04 +0300)
+- Update README.md (GitHub kvolkovich-sc@users.noreply.github.com, 2019-01-13 12:21:53 +0300)
+
+[Release 1.1.0-beta.6](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.0-beta.6) Fri Jan 11 2019 15:28:12 GMT+0300 (MSK)
+=======================================================
+
+- Fix build (Kirill Volkovich kirill.volkovich@opuscapita.com, 2019-01-11 15:19:02 +0300)
+- Fix release process (Kirill Volkovich kirill.volkovich@opuscapita.com, 2019-01-11 15:11:13 +0300)
+- Update api-overview.md (GitHub amourzenkov-sc@users.noreply.github.com, 2019-01-10 19:37:41 +0300)
+
+[Release 1.1.0-beta.5](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.0-beta.5) Mon Jan 07 2019 18:51:45 GMT+0300 (MSK)
+=======================================================
+
+- Add hungarian locale ([#249](https://github.com/OpusCapita/filemanager/issues/249)) (Kirill Volkovich andras.vagner@gmail.com, 2019-01-07 16:38:26 +0100)
+-  [#244](https://github.com/OpusCapita/filemanager/issues/244) Add custom button example to "FileNavigator" (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-12-14 12:38:59 +0300)
+- Cleanup [ci skip] (Egor Stambakio stambakio@scand.com, 2018-12-06 10:43:00 +0300)
+- Set up new deploy job (Egor Stambakio stambakio@scand.com, 2018-12-06 10:42:31 +0300)
+- Build (Egor Stambakio stambakio@scand.com, 2018-11-21 15:32:06 +0300)
+- Refactor build process ([#242](https://github.com/OpusCapita/filemanager/issues/242)) (GitHub 31243790+estambakio-sc@users.noreply.github.com, 2018-11-21 15:11:26 +0300)
+- Fixing link to demo application [skip ci] (GitHub asergeev-sc@users.noreply.github.com, 2018-10-25 23:04:01 +0300)
+- Update README.md (GitHub kvolkovich-sc@users.noreply.github.com, 2018-10-25 19:24:39 +0300)
+- Update README.md (GitHub kvolkovich-sc@users.noreply.github.com, 2018-10-25 19:23:26 +0300)
+-  [#241](https://github.com/OpusCapita/filemanager/issues/241) Fix demo (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-10-25 19:12:17 +0300)
+- Update upgrade.sh (GitHub asergeev-sc@users.noreply.github.com, 2018-10-22 08:11:52 +0300)
+- Update README.md (GitHub kvolkovich-sc@users.noreply.github.com, 2018-10-22 00:28:32 +0300)
+- chmod +x (Egor Stambakio stambakio@scand.com, 2018-10-05 16:49:41 +0300)
+- Refactor helm config (Egor Stambakio stambakio@scand.com, 2018-10-05 16:48:48 +0300)
+- Add files content search for server-side (Andrei Mourzenkov mourzenkov@scand.com, 2018-09-15 16:29:21 +0300)
+- Fixed start on Windows system. (Sergey Tamkov tamkov@scand.com, 2018-09-11 12:16:11 +0300)
+- Rename `getCapability` => `getContextCapabilities` [#223](https://github.com/OpusCapita/filemanager/issues/223) (Sergey Tamkov tamkov@scand.com, 2018-09-06 20:02:39 +0300)
+- Fix demo files population (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-09-04 13:33:32 +0300)
+- Fix demo files population (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-09-04 12:25:23 +0300)
+- Fix demo files population (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-09-04 12:21:04 +0300)
+- Build with npm ([#235](https://github.com/OpusCapita/filemanager/issues/235)) (GitHub asergeev-sc@users.noreply.github.com, 2018-09-03 23:56:03 +0300)
+- Fix big files upload for demo installation (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-09-03 21:15:41 +0300)
+- Fix broken links in docs (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-09-02 15:47:42 +0300)
+- Fix shebang (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-08-31 14:46:16 +0300)
+
+[Release 1.1.0-beta.4](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.0-beta.4) Wed Aug 29 2018 19:47:34 GMT+0300 (MSK)
+=======================================================
+
+- (Issue [#228](https://github.com/OpusCapita/filemanager/issues/228)) Fix recursive queries to the API (PR [#229](https://github.com/OpusCapita/filemanager/issues/229)) (Kirill Volkovich worldbeater-dev@yandex.ru, 2018-08-29 17:23:21 +0300)
+- Update ingress.yaml (GitHub kvolkovich-sc@users.noreply.github.com, 2018-08-29 16:08:07 +0300)
+- Remove auth requirement for demo installation (Egor Stambakio stambakio@scand.com, 2018-08-29 12:42:28 +0300)
+- Update RAML docs (Andrei Mourzenkov mourzenkov@scand.com, 2018-08-29 11:54:58 +0300)
+- Update raml documentation (Andrei Mourzenkov mourzenkov@scand.com, 2018-08-29 11:31:06 +0300)
+- Update api-overview.md (GitHub amourzenkov-sc@users.noreply.github.com, 2018-08-29 10:49:54 +0300)
+- Update README.md (GitHub kvolkovich-sc@users.noreply.github.com, 2018-08-29 01:01:53 +0300)
+- Update README.md (GitHub kvolkovich-sc@users.noreply.github.com, 2018-08-24 19:49:28 +0300)
+- Update README.md (GitHub kvolkovich-sc@users.noreply.github.com, 2018-08-24 19:49:10 +0300)
+- Update README.md (GitHub kvolkovich-sc@users.noreply.github.com, 2018-08-23 17:55:00 +0300)
+- Update README.md (GitHub kvolkovich-sc@users.noreply.github.com, 2018-08-23 17:54:47 +0300)
+- Deploy demo to Azure (PR [#221](https://github.com/OpusCapita/filemanager/issues/221), ISSUE [#220](https://github.com/OpusCapita/filemanager/issues/220)) (Kirill Volkovich 31243790+estambakio-sc@users.noreply.github.com, 2018-08-23 16:11:02 +0300)
+- Suppress az login output (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-08-19 00:05:27 +0300)
+- Suppress az login output (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-08-18 23:53:42 +0300)
+
+[Release 1.1.0-beta.2](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.0-beta.2) Fri Aug 17 2018 19:04:25 GMT+0300 (MSK)
+=======================================================
+
+- Updated "lodash" dependency to fix potential vulnerability. [#217](https://github.com/OpusCapita/filemanager/issues/217) (Sergey Tamkov tamkov@scand.com, 2018-08-16 19:25:40 +0300)
+- Updated "superagent" dependency to fix potential vulnerability. [#217](https://github.com/OpusCapita/filemanager/issues/217) (Sergey Tamkov tamkov@scand.com, 2018-08-16 19:12:20 +0300)
+- Up-to-date eslint config, better eslint excludes, lerna works with npm ([#219](https://github.com/OpusCapita/filemanager/issues/219)) (GitHub 31243790+estambakio-sc@users.noreply.github.com, 2018-08-16 15:58:18 +0300)
+- Fix wrong API example link in readme ([#216](https://github.com/OpusCapita/filemanager/issues/216)) (Kirill Volkovich worldbeater-dev@yandex.ru, 2018-08-14 19:38:51 +0300)
+- Merge branch 'master' of github.com:OpusCapita/filemanager (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-08-06 15:01:54 +0300)
+- Fix wrong license info in documentation (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-08-06 15:01:30 +0300)
+- Update README.md ([#212](https://github.com/OpusCapita/filemanager/issues/212)) (Kirill Volkovich blake.regalia@gmail.com, 2018-08-06 01:02:18 -0700)
+
+[Release 1.1.0-beta.1](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.0-beta.1) Thu Aug 02 2018 10:28:14 GMT+0300 (MSK)
+=======================================================
+
+- Add ability to call own methods on resource item events ([#210](https://github.com/OpusCapita/filemanager/issues/210)) (Kirill Volkovich jakub.szewczykk@gmail.com, 2018-08-01 21:14:49 +0200)
+- Temporary disable CircleCI cache (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-07-30 10:58:28 +0300)
+- Resolve case-insensitive fs issues (git) (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-07-30 10:35:24 +0300)
+
+[Release 1.1.0-beta.0](https://github.com/OpusCapita/filemanager/releases/tag/v1.1.0-beta.0) Sun Jul 29 2018 19:58:27 GMT+0300 (MSK)
+=======================================================
+
+-  [#209](https://github.com/OpusCapita/filemanager/issues/209) Remove "/api" postfix for server-nodejs (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-07-29 19:48:20 +0300)
+-  [#209](https://github.com/OpusCapita/filemanager/issues/209) Add possibility to pass "logger" as config param to server (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-07-29 19:32:04 +0300)
+-  [#209](https://github.com/OpusCapita/filemanager/issues/209) Remove odd console.log (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-07-29 17:25:36 +0300)
+- Update config.yml (GitHub asergeev-sc@users.noreply.github.com, 2018-07-21 20:45:19 +0300)
+
+[Release 1.0.13](https://github.com/OpusCapita/filemanager/releases/tag/v1.0.13) Sun Jul 29 2018 17:30:13 GMT+0300 (MSK)
+=======================================================
+
+-  [#209](https://github.com/OpusCapita/filemanager/issues/209) Remove odd console.log (Kirill Volkovich kirill.volkovich@opuscapita.com, 2018-07-29 17:25:36 +0300)
+- Update config.yml (GitHub asergeev-sc@users.noreply.github.com, 2018-07-21 20:45:19 +0300)
+
 Release 1.0.12 Thu May 17 2018 01:14:02 GMT+0300 (MSK)
 =======================================================
 

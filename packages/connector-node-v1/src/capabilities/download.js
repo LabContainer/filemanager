@@ -6,7 +6,11 @@ import nanoid from 'nanoid';
 import icons from '../icons-svg';
 import getMess from '../translations';
 
-let label = 'download';
+const label = 'download';
+
+function toParams(data) {
+  return Object.keys(data).map(key => `${key}=${encodeURIComponent(data[key])}`).join('&');
+}
 
 async function handler(apiOptions, actions) {
   const {
@@ -15,7 +19,7 @@ async function handler(apiOptions, actions) {
     getNotifications
   } = actions;
 
-  let getMessage = getMess.bind(null, apiOptions.locale);
+  const getMessage = getMess.bind(null, apiOptions.locale);
 
   const notificationId = label;
   const notificationChildId = nanoid();
@@ -91,7 +95,7 @@ async function handler(apiOptions, actions) {
     const quantity = resources.length;
     if (quantity === 1) {
       const { id, name } = resources[0];
-      const downloadUrl = `${apiOptions.apiRoot}/download?items=${id}`;
+      const downloadUrl = `${apiOptions.apiRoot}/download?items=${id}&${toParams(apiOptions.parameters)}&${toParams(apiOptions.header)}`;
       // check if the file is available and trigger native browser saving prompt
       // if server is down the error will be catched and trigger relevant notification
       await api.getResourceById(apiOptions, id);
@@ -102,7 +106,7 @@ async function handler(apiOptions, actions) {
       onStart({ archiveName, quantity });
       const content = await api.downloadResources({ resources, apiOptions, onProgress });
       setTimeout(onSuccess, 1000);
-      promptToSaveBlob({ content, name: archiveName })
+      promptToSaveBlob({ content, name: archiveName });
     }
   } catch (err) {
     onFailError({
@@ -111,19 +115,19 @@ async function handler(apiOptions, actions) {
       notificationId,
       updateNotifications
     });
-    console.log(err)
+    console.log(err);
   }
 }
 
 export default (apiOptions, actions) => {
-  let localeLabel = getMess(apiOptions.locale, label);
+  const localeLabel = getMess(apiOptions.locale, label);
   const { getSelectedResources } = actions;
   return {
     id: label,
     icon: { svg: icons.fileDownload },
     label: localeLabel,
     shouldBeAvailable: (apiOptions) => {
-      let selectedResources = getSelectedResources();
+      const selectedResources = getSelectedResources();
 
       return (
         selectedResources.length > 0 &&
@@ -134,4 +138,4 @@ export default (apiOptions, actions) => {
     availableInContexts: ['row', 'toolbar'],
     handler: () => handler(apiOptions, actions)
   };
-}
+};

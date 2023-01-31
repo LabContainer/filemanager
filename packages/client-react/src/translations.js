@@ -1,28 +1,47 @@
 const translations = {
   en: {
-    moveForward: 'Move forward',
-    moveBack: 'Move back',
+    'common.Toolbar.moveForward': 'Move forward',
+    'common.Toolbar.moveBack': 'Move back',
+    'common.NoFilesFoundStub.nothingToShow': 'There are no data to display',
+    'common.NoFilesFoundStub.useContextMenu': 'Use toolbar or context menu to perform available actions'
   },
-
+  fr: {
+    'common.Toolbar.moveForward': 'Avancer',
+    'common.Toolbar.moveBack': 'Revenir en arrière',
+    'common.NoFilesFoundStub.nothingToShow': 'Aucun élément à afficher',
+    'common.NoFilesFoundStub.useContextMenu': 'Utilisez la barre d\'outil ou le menu contextuel pour faire une action'
+  },
+  zh: {
+    'common.Toolbar.moveForward': '向前',
+    'common.Toolbar.moveBack': '后退',
+  },
   de: {
-    moveForward: 'Vorwärts',
-    moveBack: 'Zurück',
+    'common.Toolbar.moveForward': 'Vorwärts',
+    'common.Toolbar.moveBack': 'Zurück',
+    'common.NoFilesFoundStub.nothingToShow': 'Es gibt keine Daten, die angezeigt werden können',
+    'common.NoFilesFoundStub.useContextMenu': 'Nutzen Sie die Symbolleiste oder das Kontextmenü, um die verfügbaren Aktionen auszuführen'
   },
   fi: {
-    moveForward: 'Siirrä eteenpäin',
-    moveBack: 'Siirrä taaksepäin',
+    'common.Toolbar.moveForward': 'Siirrä eteenpäin',
+    'common.Toolbar.moveBack': 'Siirrä taaksepäin',
+  },
+  hu: {
+    'common.Toolbar.moveForward': 'Előre lépés',
+    'common.Toolbar.moveBack': 'Vissza lépés',
   },
   ru: {
-    moveForward: 'Переместить вперед',
-    moveBack: 'Переместить назад',
+    'common.Toolbar.moveForward': 'Переместить вперед',
+    'common.Toolbar.moveBack': 'Переместить назад',
+    'common.NoFilesFoundStub.nothingToShow': 'Нет данных для отображения',
+    'common.NoFilesFoundStub.useContextMenu': 'Используйте доступные действия на панели инструментов или в контекстном меню'
   },
   no: {
-    moveForward: 'Flytt fremover',
-    moveBack: 'Flytt bakover',
+    'common.Toolbar.moveForward': 'Flytt fremover',
+    'common.Toolbar.moveBack': 'Flytt bakover',
   },
   sv: {
-    moveForward: 'Flytta framåt',
-    moveBack: 'Flytta bakåt',
+    'common.Toolbar.moveForward': 'Flytta framåt',
+    'common.Toolbar.moveBack': 'Flytta bakåt',
   }
 };
 

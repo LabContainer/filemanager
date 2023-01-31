@@ -5,11 +5,9 @@
 
 import React, { Component } from 'react';
 import { showroomScopeDecorator } from '@opuscapita/react-showroom-client';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContextProvider } from 'react-dnd';
 import connectorNodeV1 from '@opuscapita/react-filemanager-connector-node-v1';
 
-let connectors = {
+window.connectors = {
   nodeV1: connectorNodeV1
 };
 
@@ -19,8 +17,6 @@ class FileNavigatorScope extends Component {
   constructor(props) {
     super(props);
 
-    this.connectors = connectors;
-
     this.state = {
       nodejsInitPath: '/',
       nodejsInitId: ''
@@ -28,11 +24,11 @@ class FileNavigatorScope extends Component {
   }
 
   componentDidMount() {
-    this.handleNodejsInitPathChange('')
+    this.handleNodejsInitPathChange('');
   }
 
   handleNodejsLocationChange = (resourceLocation) => {
-    let resourceLocationString = '/' + resourceLocation.slice(1, resourceLocation.length).map(o => o.name).join('/');
+    const resourceLocationString = '/' + resourceLocation.slice(1, resourceLocation.length).map(o => o.name).join('/');
     this.setState({
       nodejsInitPath: resourceLocationString,
       nodejsInitId: resourceLocation[resourceLocation.length - 1].id
@@ -44,11 +40,11 @@ class FileNavigatorScope extends Component {
       nodejsInitPath: path || '/'
     });
 
-    let apiOptions = {
-      apiRoot: `${window.env.SERVER_URL}/api`
+    const apiOptions = {
+      apiRoot: `${window.env.SERVER_URL}`
     };
 
-    let nodejsInitId = await connectors.nodeV1.api.getIdForPath(apiOptions, path || '/');
+    const nodejsInitId = await window.connectors.nodeV1.api.getIdForPath(apiOptions, path || '/');
 
     if (nodejsInitId) {
       this.setState({ nodejsInitId });
@@ -58,9 +54,7 @@ class FileNavigatorScope extends Component {
   render() {
     return (
       <div>
-        <DragDropContextProvider backend={HTML5Backend}>
-          {this._renderChildren()}
-        </DragDropContextProvider>
+        {this._renderChildren()}
       </div>
     );
   }

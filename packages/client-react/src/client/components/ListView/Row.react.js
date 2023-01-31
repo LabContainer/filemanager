@@ -1,53 +1,15 @@
 // Copied from https://github.com/bvaughn/react-virtualized/blob/04d1221133a1c59be24c8af90ae09e46000372b5/source/Table/defaultRowRenderer.js#L1
 
-// TODO Sure this component can be optimised using "shouldComponentUpdate"
+// TODO Make sure this component can be optimised using "shouldComponentUpdate"
 
 import React, { Component } from 'react';
-import { DragSource } from 'react-dnd';
 import { ContextMenuTrigger } from "react-contextmenu";
 
-const RowDragSource = {
-  canDrag(props) {
-    // You can disallow drag based on props
-    return true;
-    // return props.isReady;
-  },
-
-  isDragging(props, monitor) {
-    // console.log('is dragging');
-    // console.log('item', monitor.getItem());
-    return monitor.getItem().id === props.rowData.id;
-  },
-
-  beginDrag(props, monitor, component) {
-    const item = { id: props.rowData.id };
-    return item;
-  },
-
-  endDrag(props, monitor, component) {
-    if (!monitor.didDrop()) {
-      return;
-    }
-
-    const item = monitor.getItem(); // eslint-disable-line
-    const dropResult = monitor.getDropResult(); // eslint-disable-line
-  }
-};
-
-function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging()
-  };
-}
-
-@DragSource('filemanager-resource', RowDragSource, collect)
 class Row extends Component {
   render() {
-    /* eslint-disable */
-    let {
-      className,
+    /* eslint-disable  react/prop-types */
+    const {
+      className, // eslint-disable-line no-unused-vars
       columns,
       index,
       onRowClick,
@@ -60,13 +22,10 @@ class Row extends Component {
       selection,
       lastSelected,
       loading,
-      isDragging,
-      connectDragSource,
-      connectDragPreview,
       contextMenuId,
       hasTouch
     } = this.props;
-    /* eslint-enable */
+    /* eslint-enable react/prop-types */
 
     const a11yProps = {};
 
@@ -99,29 +58,26 @@ class Row extends Component {
       }
     }
 
-    let isSelected = selection.indexOf(rowData.id) !== -1;
-    let isLastSelected = lastSelected === rowData.id;
+    const isSelected = selection.indexOf(rowData.id) !== -1;
+    const isLastSelected = lastSelected === rowData.id;
 
     return (
       <ContextMenuTrigger id={contextMenuId} holdToDisplay={hasTouch ? 1000 : -1}>
-        {connectDragPreview(connectDragSource((
-          <div
-            {...a11yProps}
-            className={`
+        <div
+          {...a11yProps}
+          className={`
               ReactVirtualized__Table__row
               oc-fm--list-view__row
               ${(! loading && isSelected) ? 'oc-fm--list-view__row--selected' : ''}
               ${(!loading && isLastSelected) ? 'oc-fm--list-view__row--last-selected' : ''}
-              ${(!loading && isDragging) ? 'oc-fm--list-view__row--dragging' : ''}
               ${loading ? 'oc-fm--list-view__row--loading' : ''}
             `}
-            key={rowData.id}
-            role="row"
-            style={style}
-          >
-            {columns}
-          </div>
-        )))}
+          key={rowData.id}
+          role="row"
+          style={style}
+        >
+          {columns}
+        </div>
       </ContextMenuTrigger>
     );
   }

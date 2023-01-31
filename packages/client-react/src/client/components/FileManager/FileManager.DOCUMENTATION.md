@@ -1,4 +1,4 @@
-See [FileNavigator documentation and example](http://opuscapita-filemanager-demo-master.azurewebsites.net/?currentComponentName=FileNavigator&maxContainerWidth=100%25&showSidebar=true)
+See [FileNavigator documentation and example](https://demo.core.dev.opuscapita.com/filemanager/master/?currentComponentName=FileNavigator&maxContainerWidth=100%25&showSidebar=true)
 
 ### Code Example
 
@@ -16,11 +16,11 @@ See [FileNavigator documentation and example](http://opuscapita-filemanager-demo
     
       {/* Use NodeJS API v1 connector */}
       <FileNavigator
-        id="cusomization-area"
+        id="filemanager-cusomization-area"
         api={_scope.connectors.nodeV1.api}
         apiOptions={{
           ..._scope.connectors.nodeV1.apiOptions,
-          apiRoot: `${window.env.SERVER_URL}/api`,
+          apiRoot: `${window.env.SERVER_URL}`,
           locale: 'en' // 'en' / 'de'
         }}
         capabilities={_scope.connectors.nodeV1.capabilities}
@@ -90,5 +90,5 @@ FileManager
 
 ### License
 
-Licensed by © 2017 OpusCapita
+Apache License Version 2.0
 

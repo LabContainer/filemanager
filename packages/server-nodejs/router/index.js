@@ -11,7 +11,7 @@ const {
   handleError
 } = require('./lib');
 
-module.exports = options => {
+module.exports = config => {
   const router = express.Router();
 
   router.use(function(req, res, next) {
@@ -28,11 +28,11 @@ module.exports = options => {
   const connect = (moduleLocation, getArgs) => (req, res, next) => {
     require(moduleLocation)(Object.assign(
       {
-        options,
+        config,
         req,
         res,
         next,
-        handleError: handleError({ options, req, res })
+        handleError: handleError({ config, req, res })
       },
       getArgs ? getArgs() : {}
     ));
@@ -42,7 +42,7 @@ module.exports = options => {
     try {
       reqPath = id2path(id);
     } catch (err) {
-      return handleError({ options, req, res })(Object.assign(
+      return handleError({ config, req, res })(Object.assign(
         err,
         { httpCode: 400 }
       ));
@@ -51,24 +51,24 @@ module.exports = options => {
     return next();
   });
 
-  router.route('/api/files/:id/children').
+  router.route('/files/:id/children').
     get(connect('./listChildren', _ => ({ path: reqPath })));
 
-  router.route('/api/files/:id/search').
+  router.route('/files/:id/search').
     get(connect('./search', _ => ({ path: reqPath })));
 
-  router.route('/api/files/:id').
+  router.route('/files/:id').
     get(connect('./statResource', _ => ({ path: reqPath }))).
     patch(connect('./renameCopyMove', _ => ({ path: reqPath }))).
     delete(connect('./remove', _ => ({ path: reqPath })));
 
-  router.route('/api/files').
+  router.route('/files').
     get(connect('./statResource', _ => ({ path: path.sep }))).
     post(connect('./uploadOrCreate'));
 
-  router.route('/api/download').
+  router.route('/download').
     get(connect('./download'));
 
-  router.use((err, req, res, next) => handleError({ options, req, res })(err));
+  router.use((err, req, res, next) => handleError({ config, req, res })(err));
   return router;
 };

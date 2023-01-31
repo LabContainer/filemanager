@@ -31,6 +31,71 @@ const translations = {
     reallyRemove: '{files} will be deleted. Do you really want to proceed?',
     unableReadDir: 'Unable to read a directory.'
   },
+  fr: {
+    uploading: 'Ajout d\'un document en cours',
+    uploadingItem: 'Ajout en cours d\'un fichier',
+    uploadingItems: 'Ajout en cours de {quantity} fichiers',
+    upload: 'Ajouter un document',
+    remove: 'Supprimer',
+    download: 'Téléchargement',
+    rename: 'Renommer',
+    creating: 'Création',
+    creatingName: 'Création {name}...',
+    create: 'Créer',
+    createFolder: 'Créer un dossier',
+    zipping: 'Archivage',
+    zippingItem: 'Archivage d\'un fichier',
+    zippingItems: 'Archivage de {quantity} fichiers',
+    items: 'fichiers',
+    item: 'fichier',
+    cancel: 'Annuler',
+    confirm: 'Confirmer',
+    folderName: 'Nom du dossier',
+    files: 'fichiers',
+    fileExist: 'Fichier ou dossier avec ce nom {name} existe déjà',
+    newName: 'Nouveau nom',
+    emptyName: 'Le nom ne peut être vide',
+    tooLongFolderName: 'Le nom du dossier contiens plus de 255 lettres',
+    folderNameNotAllowedCharacters: 'Le nom du dossier de contiens pas assez de lettres',
+    title: 'Titre',
+    fileSize: 'Taille (Ko)',
+    lastModified: 'Dernière modification',
+    reallyRemove: '{files} vas être supprimer. Voulez vous confirmer ?',
+    unableReadDir: 'Vous ne pouvez pas lire se contenue.',
+    quota: "Vous n'avez plus d'espace de stockage"
+  },
+  zh: {
+    uploading: '正在上传中',
+    uploadingItem: '正在上传1个文件',
+    uploadingItems: '正在上传{quantity}个文件',
+    upload: '上传',
+    remove: '移除',
+    download: '下载',
+    rename: '重命名',
+    creating: '正在创建中',
+    creatingName: '正在创建 {name} 中...',
+    create: '创建',
+    createFolder: '创建文件夹',
+    zipping: '正在压缩中',
+    zippingItem: '正在压缩1个文件',
+    zippingItems: '正在压缩{quantity}个文件',
+    items: '文件',
+    item: '文件',
+    cancel: '取消',
+    confirm: '确定',
+    folderName: '文件夹名称',
+    files: '文件',
+    fileExist: '已存在{name}',
+    newName: '新名称',
+    emptyName: '名称不能为空',
+    tooLongFolderName: '文件夹名称不能超过255个字符',
+    folderNameNotAllowedCharacters: '文件夹名称不允许存在特殊字符',
+    title: '标题',
+    fileSize: '文件大小',
+    lastModified: '最近修改时间',
+    reallyRemove: '{files}将会被删除,请确认!',
+    unableReadDir: '无法读取文件夹'
+  },
 
   de: {
     uploading: 'Wird hochgeladen',
@@ -94,6 +159,39 @@ const translations = {
     lastModified: 'Muokattu viimeksi',
     reallyRemove: '{files} poistetaan. Haluatko varmasti jatkaa?',
     unableReadDir: 'Hakemistoa ei voi lukea.'
+  },
+
+  hu: {
+    uploading: 'Feltöltés',
+    uploadingItem: '1 elem feltöltése',
+    uploadingItems: '{quantity} elem feltöltése',
+    upload: 'Feltöltés',
+    remove: 'Törlés',
+    download: 'Letöltés',
+    rename: 'Átnevezés',
+    creating: 'Létrehozás',
+    creatingName: '{name} létrehozása...',
+    create: 'Létrehoz',
+    createFolder: 'Mappa létrehozása',
+    zipping: 'Tömörítés',
+    zippingItem: '1 elem tömörítése',
+    zippingItems: '{quantity} elem tömörítése',
+    items: 'elemek',
+    item: 'elem',
+    cancel: 'Mégse',
+    confirm: 'Megerősít',
+    folderName: 'Mappa neve',
+    files: 'Fájlok',
+    fileExist: 'Fájl vagy mappa {name} névvel nem létezik',
+    newName: 'Új név',
+    emptyName: 'Név nem lehet üres',
+    tooLongFolderName: 'Mappa neve nem lehet 255 karakternél hosszabb',
+    folderNameNotAllowedCharacters: 'Mappa neve tiltott karaktereket tartalmaz',
+    title: 'Cím',
+    fileSize: 'Fájl mérete',
+    lastModified: 'Utoljára módosítva',
+    reallyRemove: '{files} fájl törölve lesz. Tényleg folytatni akarja?',
+    unableReadDir: 'Nem lehet olvasni a könyvtárat.'
   },
 
   no: {
@@ -193,19 +291,51 @@ const translations = {
     lastModified: 'Senast ändrad',
     reallyRemove: '{files} kommer att tas bort. Vill du verkligen fortsätta?',
     unableReadDir: 'Det gick inte att läsa en katalog.'
+  },
+  ar: {
+    uploading: 'تحميل',
+    uploadingItem: 'تحميل عنصر واحد',
+    uploadingItems: 'تحميل {quantity} العناصر',
+    upload: 'تحميل',
+    remove: 'إزالة',
+    download: 'تحميل',
+    rename: 'إعادة تسمية',
+    creating: 'خلق',
+    creatingName: 'إنشاء {name} ...',
+    create: 'يخلق',
+    createFolder: 'أنشئ مجلد',
+    zipping: 'ضغط',
+    zippingItem: 'ضغط 1 عنصر',
+    zippingItems: 'ضغط {الكمية} من العناصر',
+    items: 'العناصر',
+    item: 'العنصر',
+    cancel: 'يلغي',
+    confirm: 'يتأكد',
+    folderName: 'إسم الملف',
+    files: 'الملفات',
+    fileExist: 'الملف أو المجلد الذي يحمل الاسم {name} موجود بالفعل',
+    newName: 'اسم جديد',
+    emptyName: 'لا يمكن أن يكون الاسم فارغًا',
+    tooLongFolderName: 'لا يمكن أن يحتوي اسم المجلد على أكثر من 255 حرفًا',
+    folderNameNotAllowedCharacters: 'يحتوي اسم المجلد على أحرف غير مسموح بها',
+    title: 'لقب',
+    fileSize: 'حجم الملف',
+    lastModified: 'آخر تعديل',
+    reallyRemove: 'سيتم حذف {files}. هل تريد حقًا المتابعة؟',
+    unableReadDir: 'غير قادر على قراءة دليل.'
   }
 };
 
 export default function getMessage(locale, key, params) {
-  let translationExists = (translations[locale] && translations[locale][key]);
-  let translation = translationExists ? translations[locale][key] : translations['en'][key];
+  const translationExists = (translations[locale] && translations[locale][key]);
+  const translation = translationExists ? translations[locale][key] : translations['en'][key];
   if (!params) {
     return translation;
   }
 
-  let re = /{\w+}/g;
+  const re = /{\w+}/g;
   function replace(match) {
-    let replacement = match.slice(1, -1);
+    const replacement = match.slice(1, -1);
     return params[replacement] ? params[replacement] : '';
   }
 

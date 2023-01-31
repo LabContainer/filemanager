@@ -32,7 +32,39 @@ const translations = {
     notInitAPIClient: 'Google API client cannot be initialized',
     successInit: 'Google API client successfully initialized',
   },
-
+  fr: {
+    uploading: 'Ajout d\'un document en cours',
+    uploadingItem: 'Ajout en cours d\'un fichier',
+    uploadingItems: 'Ajout en cours de {quantity} fichiers',
+    upload: 'Ajouter un document',
+    remove: 'Supprimer',
+    download: 'Téléchargement',
+    rename: 'Renommer',
+    creating: 'Création',
+    creatingName: 'Création {name}...',
+    create: 'Créer',
+    createFolder: 'Créer un dossier',
+    zipping: 'Archivage',
+    zippingItem: 'Archivage d\'un fichier',
+    zippingItems: 'Archivage de {quantity} fichiers',
+    items: 'fichiers',
+    item: 'fichier',
+    cancel: 'Annuler',
+    confirm: 'Confirmer',
+    folderName: 'Nom du dossier',
+    files: 'fichiers',
+    fileExist: 'Fichier ou dossier avec ce nom {name} existe déjà',
+    newName: 'Nouveau nom',
+    emptyName: 'Le nom ne peut être vide',
+    tooLongFolderName: 'Le nom du dossier contiens plus de 255 lettres',
+    folderNameNotAllowedCharacters: 'Le nom du dossier de contiens pas assez de lettres',
+    title: 'Titre',
+    fileSize: 'Taille (Ko)',
+    lastModified: 'Dernière modification',
+    reallyRemove: '{files} vas être supprimer. Voulez vous confirmer ?',
+    unableReadDir: 'Vous ne pouvez pas lire se contenue.',
+    quota: "Vous n'avez plus d'espace de stockage"
+  },
   de: {
     uploading: 'Wird hochgeladen',
     uploadingItem: '1 Element wird geladen',
@@ -66,18 +98,52 @@ const translations = {
     notInitAPIClient: 'Google API-Client konnte nicht initialisiert werden',
     successInit: 'Google API-Client wurde erfolgreich initialisiert',
   },
+
+  hu: {
+    uploading: 'Feltöltés',
+    uploadingItem: '1 elem feltöltése',
+    uploadingItems: '{quantity} elem feltöltése',
+    upload: 'Feltöltés',
+    remove: 'Törlés',
+    downloadingName: '{name} letöltése...',
+    downloadingItem: '1 elem letöltése',
+    downloadingItems: '{quantity} elem letöltése',
+    download: 'Letöltés',
+    rename: 'Átnevezés',
+    creating: 'Létrehozás',
+    creatingName: '{name} létrehozása...',
+    create: 'Létrehoz',
+    createFolder: 'Mappa létrehozása',
+    items: 'elemek',
+    item: 'elem',
+    error: 'hiba',
+    folderName: 'Mappa neve',
+    fileExist: 'Fájl vagy mappa {name} névvel nem létezik',
+    newName: 'Új név',
+    emptyName: 'Név nem lehet üres',
+    tooLongFolderName: 'Mappa neve nem lehet 255 karakternél hosszabb',
+    notAllowedCharacters: 'A név tiltott karaktereket tartalmaz',
+    doNotRespectBill: 'We too do not respect Bill', // en
+    title: 'Cím',
+    fileSize: 'Fájl mérete',
+    lastModified: 'Utoljára módosítva',
+    signInSuccess: 'Sikeres bejelentkezés a Google Drive-ba',
+    signInFail: 'Bejelentkezés a Google Drive-ba sikertelen',
+    notInitAPIClient: 'Nem inicializálható a Google API kliens',
+    successInit: 'Google API kliens sikeresen inicializálva',
+  },
 };
 
 export default function getMessage(locale, key, params) {
-  let translationExists = (translations[locale] && translations[locale][key]);
-  let translation = translationExists ? translations[locale][key] : translations['en'][key];
+  const translationExists = (translations[locale] && translations[locale][key]);
+  const translation = translationExists ? translations[locale][key] : translations['en'][key];
   if (!params) {
     return translation;
   }
 
-  let re = /{\w+}/g;
+  const re = /{\w+}/g;
   function replace(match) {
-    let replacement = match.slice(1, -1);
+    const replacement = match.slice(1, -1);
     return params[replacement] ? params[replacement] : '';
   }
 
